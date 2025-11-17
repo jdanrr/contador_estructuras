@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class TablaSimbolosOrdenada<Key extends Comparable<Key>, Value> {
 
-    private static final int CAPACIDAD_INICIAL = 4;
+    private static final int CAPACIDAD_INICIAL = 1000;
 
     private Key[] keys;
     private Value[] vals;

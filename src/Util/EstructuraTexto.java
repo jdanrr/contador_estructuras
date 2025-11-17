@@ -1,9 +1,7 @@
 package Util;
 
 import java.text.Normalizer;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import EstructurasDatos.Lista;
 
 /**
  * Clase de apoyo para normalizar líneas de texto.
@@ -12,28 +10,41 @@ import java.util.List;
 public class EstructuraTexto {
 
     /**
-     * Convierte una línea de texto en una lista de palabras limpias.
+     * Convierte una línea de texto en una Lista de palabras limpias.
      *
      * @param linea línea original
-     * @return lista de palabras normalizadas
+     * @return Lista de palabras normalizadas
      */
-    public List<String> obtenerPalabras(String linea) {
+    public Lista<String> obtenerPalabras(String linea) {
 
+        // Si la línea es null, regresamos una lista vacía
         if (linea == null) {
-            return Collections.emptyList();
+            return new Lista<>();
         }
 
+        // Normalizar: quitar tildes, pasar a minúsculas, limpiar símbolos
         String limpio = Normalizer.normalize(linea, Normalizer.Form.NFD)
                 .replaceAll("[^\\p{ASCII}]", "")
                 .toLowerCase()
                 .replaceAll("[^a-zA-Z ]", " ");
 
         limpio = limpio.trim();
+
+        // Si la línea termina vacía, retornamos una lista vacía
         if (limpio.isEmpty()) {
-            return Collections.emptyList();
+            return new Lista<>();
         }
 
+        // Separar palabras
         String[] partes = limpio.split("\\s+");
-        return Arrays.asList(partes);
+
+        // Convertir el arreglo en tu Lista personalizada
+        Lista<String> resultado = new Lista<>();
+
+        for (String palabra : partes) {
+            resultado.addLast(palabra);
+        }
+
+        return resultado;
     }
 }
